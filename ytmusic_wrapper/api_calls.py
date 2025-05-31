@@ -1,4 +1,5 @@
 """Provides the `APICalls` class for interacting with the Youtube Music API. It includes methods for controlling playback, adjusting volume, and retrieving song information."""
+from __future__ import annotations
 
 import json
 import logging

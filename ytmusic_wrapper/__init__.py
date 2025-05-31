@@ -2,11 +2,13 @@
 
 Initializes this module for the HTTP calls and obtains the access token for the Youtube Music API Server.
 """
+from __future__ import annotations
 
 import aiohttp
 
 from .api_calls import APICalls
 from .http_calls import HTTPCalls
+
 
 class ytmusic_wrapper:
     """Initialize the Main function for the HTTP calls and obtain the access token.
