@@ -1,1 +1,1 @@
-# YoutubeMusicPython
+Python library wrapper around https://github.com/th-ch/youtube-music, mainly for use with Home Assistant.
