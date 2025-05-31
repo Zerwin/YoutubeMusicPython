@@ -8,10 +8,7 @@ import aiohttp
 from .api_calls import APICalls
 from .http_calls import HTTPCalls
 
-__version__ = "1.0.0"
-
-
-class youtube_music_wrapper:
+class ytmusic_wrapper:
     """Initialize the Main function for the HTTP calls and obtain the access token.
 
     Returns an instance of APICalls, on which the Music Controller functions can be called.
