@@ -6,6 +6,7 @@ import logging
 from typing import Any, TypedDict
 
 from aiohttp import ContentTypeError
+from asyncio import timeout
 
 from .http_calls import HTTPCalls
 
@@ -71,9 +72,11 @@ class APICalls:
 
         """
         try:
-            response = await self.http_calls.get_call(
-                "/api/v1/song", self.access_token, True
-            )
+            # Timeout after 2 seconds if the request takes too long
+            async with timeout(2.0):
+                response = await self.http_calls.get_call(
+                    "/api/v1/song", self.access_token, True
+                )
         except Exception as e:  # noqa: BLE001
             logger.debug(
                 "Failed to get status from the Youtube Music API Server: %s", e
