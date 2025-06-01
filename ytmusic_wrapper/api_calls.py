@@ -5,8 +5,8 @@ import json
 import logging
 from typing import Any, TypedDict
 
-from aiohttp import ContentTypeError
 from asyncio import timeout
+from aiohttp import ContentTypeError
 
 from .http_calls import HTTPCalls
 

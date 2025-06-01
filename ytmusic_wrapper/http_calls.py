@@ -9,8 +9,7 @@ Methods:
 from __future__ import annotations
 import logging
 
-import aiohttp
-from aiohttp import ClientResponse
+from aiohttp import ClientError, ClientSession, ClientResponse
 
 logging.basicConfig(
     level=logging.INFO,
@@ -24,7 +23,7 @@ logger = logging.getLogger(__name__)
 class HTTPCalls:
     """Class to handle HTTP calls to the Youtube Music API Server."""
 
-    def __init__(self, host: str, port: int, websession: aiohttp.ClientSession) -> None:
+    def __init__(self, host: str, port: int, websession: ClientSession) -> None:
         """Initialize the HTTPCalls class with host, port, and websession."""
         self.host = host
         self.port = port
@@ -45,7 +44,7 @@ class HTTPCalls:
             response = await self.websession.get(
                 "http://" + self.host + ":" + str(self.port) + endpoint, headers=headers
             )
-        except aiohttp.ClientError as e:
+        except ClientError as e:
             if raise_for_status:
                 raise
             logger.warning("HTTP GET against %s request failed: %s", endpoint, e)
@@ -77,7 +76,7 @@ class HTTPCalls:
                 headers=headers,
                 json=body,
             )
-        except aiohttp.ClientError as e:
+        except ClientError as e:
             if raise_for_status:
                 raise
             logger.warning("HTTP POST against %s request failed: %s", endpoint, e)
@@ -94,7 +93,6 @@ class HTTPCalls:
         self,
         endpoint: str,
         access_token: str | None = None,
-        body: str | None = None,
         raise_for_status: bool = False,
     ) -> ClientResponse | None:
         """Send an asynchronous DELETE request to the specified endpoint."""
@@ -107,7 +105,7 @@ class HTTPCalls:
                 "http://" + self.host + ":" + str(self.port) + endpoint,
                 headers=headers,
             )
-        except aiohttp.ClientError as e:
+        except ClientError as e:
             if raise_for_status:
                 raise
             logger.warning("HTTP DELETE against %s request failed: %s", endpoint, e)

@@ -4,7 +4,7 @@ Initializes this module for the HTTP calls and obtains the access token for the 
 """
 from __future__ import annotations
 
-import aiohttp
+from aiohttp import ClientSession
 
 from .api_calls import APICalls
 from .http_calls import HTTPCalls
@@ -21,7 +21,7 @@ class ytmusic_wrapper:
 
     def __init__(self, host: str, port: int) -> None:
         """Create an instance of APICalls with the given host and port."""
-        session = aiohttp.ClientSession()
+        session = ClientSession()
         http_calls = HTTPCalls(host, port, session)
         self.api_calls = APICalls(http_calls, None)
 
